@@ -20,7 +20,7 @@ app.use(morgan('common'));
 app.use(helmet());
 app.use(express.json());
 app.use(cors({
-    origin: process.env.CORS_ORIGN,
+    origin: process.env.CORS_ORIGIN,
 }))
 
 app.get("/", (req, res) => {
@@ -34,7 +34,7 @@ app.use('/api/logs',logs);
 app.use(middleWares.notFound);
 app.use(middleWares.errorHandle);
 
-const port = process.env.port || 1337;
+const port = process.env.PORT || 1337;
 
 
 app.listen(port, () => {
