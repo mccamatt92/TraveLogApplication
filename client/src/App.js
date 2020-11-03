@@ -5,6 +5,7 @@ import{listLogEntries} from './API'
 
 const App =() => {
   const[logEntries,setLogEntries] =useState([]);
+  const[showPopup,setShowPopup] =useState({});
   const [viewport, setViewport] = useState({
     width: '100vw',
     height: '100vh',
@@ -29,6 +30,7 @@ const App =() => {
     >
       {
         logEntries.map(entry=>(
+          <>
           <Marker key={entry._id}
            latitude={entry.latitude} 
            longitude={entry.longitude}>
@@ -36,8 +38,8 @@ const App =() => {
            <svg
               className="marker yellow"
               style={{
-                height: `${4 * viewport.zoom}px`,
-                width: `${4 * viewport.zoom}px`,
+                height: `${5 * viewport.zoom}px`,
+                width: `${5 * viewport.zoom}px`,
               }}
               version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512">
               <g>
@@ -49,9 +51,21 @@ const App =() => {
               </g>
             </svg>
                </div>
-
-
           </Marker>
+          {
+              showPopup[entry._id] ? (
+                <Popup
+                  latitude={entry.latitude}
+                  longitude={entry.longitude}
+                  closeButton={true}
+                  closeOnClick={false}
+                  dynamicPosition={true}
+                  onClose={() => setShowPopup({})}
+                  anchor="top" >
+                </Popup>
+              ):null
+          }
+</>
         ))
       }
       </ReactMapGL>

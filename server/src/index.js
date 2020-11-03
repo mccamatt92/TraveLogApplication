@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
     });
 });
 
-app.use('/api/logs',logs);
+app.use('/api/logs', logs);
 
 app.use(middleWares.notFound);
 app.use(middleWares.errorHandle);
